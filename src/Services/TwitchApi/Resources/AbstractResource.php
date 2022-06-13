@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Services\TwitchApi\Resources;
-
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AbstractResource
+abstract class AbstractResource
 {
     public const BASE_URI = 'https://api.twitch.tv/helix';
 
@@ -28,20 +26,47 @@ class AbstractResource
         $this->denormalizer = $denormalizer;
     }
 
-    protected function getApi(string $uriEndPoint, string $bearer, array $queryParams = [],array $bodyParam = [])
+    protected function constructQueryParamString(array $queryParams): string
     {
-        return $this->sendToApi('GET', $uriEndPoint, $bearer, $queryParams, $bodyParam);
+        $queryStringParams = '';
+        foreach ($queryParams as $paramMap) {
+            if (null !== $paramMap['value']) {
+                if (is_bool($paramMap['value'])) {
+                    $paramMap['value'] = (int) $paramMap['value'];
+                }
+                $format = is_int($paramMap['value']) ? '%d' : '%s';
+                $queryStringParams .= sprintf('&%s=' . $format, $paramMap['key'], $paramMap['value']);
+            }
+        }
+
+        return $queryStringParams ? '?' . mb_substr($queryStringParams, 1) : '';
     }
 
-    private function sendToApi(
-        string $method,
-        string $uriEndPoint,
-        string $bearer,
-        array $queryParams = [],
-        array $bodyParams = []
-    )
+    protected function constructQueryParamArray(array $queryParams): array
     {
+        $queryArrayParams = [];
+        foreach ($queryParams as $param) {
+            if (null !== $param['value']) {
+                if (is_bool($param['value'])) {
+                    $param['value'] = (int) $param['value'];
+                }
+                $queryArrayParams[$param['key']] = $param['value'];
+            }
+        }
 
-        return $this->client->request($method);
+        return $queryArrayParams;
+    }
+
+    protected function constructUrl(string $urlEndPoint)
+    {
+        return self::BASE_URI . $urlEndPoint;
+    }
+
+    protected function constructHeaders($bearer): array
+    {
+        return [
+            'Authorization' => 'Bearer ' . $bearer,
+            'Client-Id' => $this->clientId,
+        ];
     }
 }

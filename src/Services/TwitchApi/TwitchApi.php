@@ -11,17 +11,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class TwitchApi
 {
-    private const BASE_URI = 'https://id.twitch.tv/oauth2/token';
-
-    /**
-     * @var HttpClientInterface
-     */
-    private HttpClientInterface $client;
-
-    /**
-     * @var OauthApi
-     */
     private OauthApi $oauthApi;
+    private SearchApi $searchApi;
 
     public function __construct(
         string $clientId,
@@ -30,11 +21,16 @@ class TwitchApi
         DenormalizerInterface $denormalizer
     ) {
         $this->oauthApi = new OauthApi($clientId, $secretId, $client, $denormalizer);
-        $this->searchApi = new SearchApi()
+        $this->searchApi = new SearchApi($clientId, $secretId, $client, $denormalizer);
     }
 
     public function getOauthApi(): OauthApi
     {
         return $this->oauthApi;
+    }
+
+    public function getSearchApi(): searchApi
+    {
+        return $this->searchApi;
     }
 }

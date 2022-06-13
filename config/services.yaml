@@ -23,22 +23,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Services\TwitchApi\Resources\AbstractResource:
+    App\Services\TwitchApi\TwitchApi:
         arguments:
             $clientId:      '%env(CLIENT_ID)%'
             $secretId:      '%env(SECRET_ID)%'
             $client:        '@Symfony\Contracts\HttpClient\HttpClientInterface'
-            $denormalizer : '@Symfony\Component\Serializer\Normalizer\DenormalizerInterface'
-
-    TwitchApi\HelixGuzzleClient:
-        public: true
-        arguments:
-            $clientId: '%env(CLIENT_ID)%'
-            $config: []
-            $baseUri: null
-
-    TwitchApi\TwitchApi:
-        arguments:
-            $helixGuzzleClient: '@TwitchApi\HelixGuzzleClient'
-            $clientId: '%env(CLIENT_ID)%'
-            $clientSecret: '%env(SECRET_ID)%'
+            $denormalizer: '@Symfony\Component\Serializer\Normalizer\DenormalizerInterface'
