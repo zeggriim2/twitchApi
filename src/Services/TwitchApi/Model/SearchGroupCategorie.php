@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\TwitchApi\model;
+namespace App\Services\TwitchApi\Model;
 
-class SearchGroupChannel
+class SearchGroupCategorie
 {
     /**
-     * @var SearchChannels[]
+     * @var SearchCategorie[]
      */
     private array $data;
 
@@ -22,7 +22,7 @@ class SearchGroupChannel
     /**
      * @param SearchCategorie[] $data
      *
-     * @return SearchGroupChannel
+     * @return SearchGroupCategorie
      */
     public function setData(array $data): self
     {
@@ -40,7 +40,7 @@ class SearchGroupChannel
     }
 
     /**
-     * @return SearchGroupChannel
+     * @return SearchGroupCategorie
      */
     public function setPagination(array $pagination): self
     {

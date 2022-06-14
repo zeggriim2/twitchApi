@@ -2,7 +2,7 @@
 
 namespace App\Services\TwitchApi\Resources;
 
-use App\Services\TwitchApi\model\Oauth;
+use App\Services\TwitchApi\Model\Oauth;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,6 +19,10 @@ class OauthApi
 
     /**
      * OauthApi constructor.
+     * @param string $clientId
+     * @param string $secretId
+     * @param HttpClientInterface $client
+     * @param DenormalizerInterface $denormalizer
      */
     public function __construct(
         string $clientId,

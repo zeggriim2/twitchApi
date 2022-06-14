@@ -65,8 +65,10 @@ abstract class AbstractResource
     protected function constructHeaders($bearer): array
     {
         return [
-            'Authorization' => 'Bearer ' . $bearer,
-            'Client-Id' => $this->clientId,
+            'headers' => [
+                'Authorization' => 'Bearer ' . $bearer,
+                'Client-Id' => $this->clientId,
+            ]
         ];
     }
 }

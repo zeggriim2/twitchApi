@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\TwitchApi\model;
+namespace App\Services\TwitchApi\Model;
 
 class Oauth
 {

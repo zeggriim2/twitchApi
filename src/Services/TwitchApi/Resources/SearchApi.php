@@ -2,8 +2,8 @@
 
 namespace App\Services\TwitchApi\Resources;
 
-use App\Services\TwitchApi\model\SearchGroupCategorie;
-use App\Services\TwitchApi\model\SearchGroupChannel;
+use App\Services\TwitchApi\Model\SearchGroupCategorie;
+use App\Services\TwitchApi\Model\SearchGroupChannel;
 use Symfony\Component\HttpFoundation\Response;
 
 class SearchApi extends AbstractResource
@@ -12,8 +12,11 @@ class SearchApi extends AbstractResource
     private const URI_SEARCH_CHANNELS = '/search/channels';
 
     /**
-     * @param string   $query // URl encoded search query
+     * @param string $bearer
+     * @param string $query // URl encoded search query
      * @param int|null $first // Maximum number of objects to return. Max :100 Default:20
+     * @param string|null $after
+     * @return SearchGroupCategorie|null
      */
     public function searchCategories(
         string $bearer,

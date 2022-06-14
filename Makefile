@@ -31,5 +31,8 @@ db-drop:
 	@echo "-----------> Suppression de la base"
 	@php bin/console doctrine:database:drop --force
 
+test-start:
+	@php bin/phpunit --coverage-html Tests/coverage --coverage-text=Tests/coverage.txt
+
 cs-fix:
 	vendor/bin/php-cs-fixer fix --allow-risky yes -vvv
