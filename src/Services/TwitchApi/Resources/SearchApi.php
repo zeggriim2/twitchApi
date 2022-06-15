@@ -25,9 +25,8 @@ class SearchApi extends AbstractResource
         string $after = null
     ): ?SearchGroupCategorie {
         $queryParams = [];
-        $options = [];
 
-        $queryParams[] = ['key' => 'query', 'value' => $query];
+        $queryParams[] = ['key' => 'query', 'value' => $query ? $query : ''];
 
         if ($first) {
             $queryParams[] = ['key' => 'first', 'value' => $first];
@@ -43,7 +42,7 @@ class SearchApi extends AbstractResource
         $url = $this->constructUrl(self::URI_SEARCH_CATEGORIES);
 
         // Construire Headers
-        $options['headers'] = $this->constructHeaders($bearer);
+        $options = $this->constructHeaders($bearer);
         $options['query'] = $queryArrayParams;
 
         $response = $this->client->request(
@@ -67,9 +66,8 @@ class SearchApi extends AbstractResource
         string $after = null
     ): ?SearchGroupChannel {
         $queryParams = [];
-        $options = [];
 
-        $queryParams[] = ['key' => 'query', 'value' => $query];
+        $queryParams[] = ['key' => 'query', 'value' => $query ? $query : ''];
         $queryParams[] = ['key' => 'live_only', 'value' => $liveOn];
 
         if ($first) {
@@ -85,7 +83,7 @@ class SearchApi extends AbstractResource
         $url = $this->constructUrl(self::URI_SEARCH_CHANNELS);
 
         // Construire Headers
-        $options['headers'] = $this->constructHeaders($bearer);
+        $options = $this->constructHeaders($bearer);
         $options['query'] = $queryArrayParams;
 
         $response = $this->client->request(

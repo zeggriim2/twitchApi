@@ -4,14 +4,14 @@
 namespace App\Services\TwitchApi\Model\Chat;
 
 
-class ChatChannelsEmotes
+class ChatEmotes
 {
     private string $id;
     private string $name;
     private array $images;
-    private string $tier;
-    private string $emote_type;
-    private string $emote_set_id;
+    private ?string $tier = null;
+    private ?string $emote_type = null;
+    private ?string $emote_set_id = null;
     private array $format;
     private array $scale;
     private array $theme_mode;
@@ -26,9 +26,9 @@ class ChatChannelsEmotes
 
     /**
      * @param string $id
-     * @return ChatChannelsEmotes
+     * @return ChatEmotes
      */
-    public function setId(string $id): ChatChannelsEmotes
+    public function setId(string $id): ChatEmotes
     {
         $this->id = $id;
         return $this;
@@ -44,7 +44,7 @@ class ChatChannelsEmotes
 
     /**
      * @param string $name
-     * @return ChatChannelsEmotes
+     * @return ChatEmotes
      */
     public function setName(string $name): self
     {
@@ -71,54 +71,54 @@ class ChatChannelsEmotes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTier(): string
+    public function getTier(): ?string
     {
         return $this->tier;
     }
 
     /**
-     * @param string $tier
+     * @param string|null $tier
      * @return self
      */
-    public function setTier(string $tier): self
+    public function setTier(?string $tier): self
     {
         $this->tier = $tier;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmoteType(): string
+    public function getEmoteType(): ?string
     {
         return $this->emote_type;
     }
 
     /**
-     * @param string $emote_type
+     * @param string|null $emote_type
      * @return self
      */
-    public function setEmoteType(string $emote_type): self
+    public function setEmoteType(?string $emote_type): self
     {
         $this->emote_type = $emote_type;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmoteSetId(): string
+    public function getEmoteSetId(): ?string
     {
         return $this->emote_set_id;
     }
 
     /**
-     * @param string $emote_set_id
-     * @return ChatChannelsEmotes
+     * @param string|null $emote_set_id
+     * @return ChatEmotes
      */
-    public function setEmoteSetId(string $emote_set_id): self
+    public function setEmoteSetId(?string $emote_set_id): self
     {
         $this->emote_set_id = $emote_set_id;
         return $this;
@@ -134,7 +134,7 @@ class ChatChannelsEmotes
 
     /**
      * @param array $format
-     * @return ChatChannelsEmotes
+     * @return ChatEmotes
      */
     public function setFormat(array $format): self
     {
@@ -152,7 +152,7 @@ class ChatChannelsEmotes
 
     /**
      * @param array $scale
-     * @return ChatChannelsEmotes
+     * @return ChatEmotes
      */
     public function setScale(array $scale): self
     {
@@ -170,7 +170,7 @@ class ChatChannelsEmotes
 
     /**
      * @param array $theme_mode
-     * @return ChatChannelsEmotes
+     * @return ChatEmotes
      */
     public function setThemeMode(array $theme_mode): self
     {

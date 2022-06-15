@@ -4,18 +4,18 @@
 namespace App\Services\TwitchApi\Model;
 
 
-use App\Services\TwitchApi\Model\Chat\ChatGlobalEmotes;
+use App\Services\TwitchApi\Model\Chat\ChatEmotes;
 
-class ChatGlobalEmotesGroup
+class ChatEmotesGroup
 {
     /**
-     * @var ChatGlobalEmotes[]
+     * @var ChatEmotes[]
      */
     private array $data;
     private string $template;
 
     /**
-     * @return ChatGlobalEmotes[]
+     * @return ChatEmotes[]
      */
     public function getData(): array
     {
@@ -23,8 +23,8 @@ class ChatGlobalEmotesGroup
     }
 
     /**
-     * @param ChatGlobalEmotes[] $data
-     * @return ChatGlobalEmotesGroup
+     * @param ChatEmotes[] $data
+     * @return ChatEmotesGroup
      */
     public function setData(array $data): self
     {
@@ -42,7 +42,7 @@ class ChatGlobalEmotesGroup
 
     /**
      * @param string $template
-     * @return ChatGlobalEmotesGroup
+     * @return ChatEmotesGroup
      */
     public function setTemplate(string $template): self
     {

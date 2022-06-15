@@ -12,11 +12,11 @@ docker-compose:
 	@#docker-compose up -d
 	@docker-compose --env-file .env.dev.local up -d
 
-start-server:
+server-start:
 	@echo "-----------> Lancement du server"
 	@symfony serve -d
 
-stop-server:
+server-stop:
 	@echo "-----------> Arrêt du server"
 	@symfony server:stop
 

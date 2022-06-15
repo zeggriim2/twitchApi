@@ -2,6 +2,9 @@
 
 namespace App\Services\TwitchApi\Model;
 
+use App\Services\TwitchApi\Model\Search\SearchCategorie;
+use App\Services\TwitchApi\Model\Search\SearchChannels;
+
 class SearchGroupChannel
 {
     /**

@@ -5,7 +5,7 @@ namespace App\Services\TwitchApi\Resources;
 
 
 use App\Services\TwitchApi\Model\ChatChannelBadgesGroup;
-use App\Services\TwitchApi\Model\ChatChannelsEmotesGroup;
+use App\Services\TwitchApi\Model\ChatEmotesGroup;
 use App\Services\TwitchApi\Model\ChatEmotesSetGroup;
 use App\Services\TwitchApi\Model\ChatGlobalEmotesGroup;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,12 +19,10 @@ class ChatApi extends AbstractResource
     private const URI_CHAT_CHANNELS_BADGES = '/chat/badges';
     private const URI_CHAT_GLOBAL_BADGES = '/chat/badges/global';
 
-
-
     public function getChannelsEmotes(
         string $bearer,
         string $broadcasterId
-    ): ?ChatChannelsEmotesGroup
+    ): ?ChatEmotesGroup
     {
         $queryParams = [];
 
@@ -44,7 +42,7 @@ class ChatApi extends AbstractResource
         );
 
         if ($response->getStatusCode() === Response::HTTP_OK) {
-            return $this->denormalizer->denormalize($response->toArray(), ChatChannelsEmotesGroup::class);
+            return $this->denormalizer->denormalize($response->toArray(), ChatEmotesGroup::class);
         }
 
         return null;
@@ -52,7 +50,7 @@ class ChatApi extends AbstractResource
 
     public function getGlobalEmotes(
         string $bearer
-    ): ?ChatGlobalEmotesGroup
+    ): ?ChatEmotesGroup
     {
         $url = $this->constructUrl(self::URI_CHAT_EMOTES_GLOBAL);
 
@@ -65,7 +63,7 @@ class ChatApi extends AbstractResource
         );
 
         if ($response->getStatusCode() === Response::HTTP_OK) {
-            return $this->denormalizer->denormalize($response->toArray(), ChatGlobalEmotesGroup::class);
+            return $this->denormalizer->denormalize($response->toArray(), ChatEmotesGroup::class);
         }
         return null;
     }
@@ -174,7 +172,7 @@ class ChatApi extends AbstractResource
         );
 
         if($response->getStatusCode() === Response::HTTP_OK) {
-//            return $this->denormalizer->denormalize()
+
         }
 
         return null;

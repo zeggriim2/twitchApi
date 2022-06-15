@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\TwitchApi\Model;
+namespace App\Services\TwitchApi\Model\Search;
 
 class SearchCategorie
 {
