@@ -4,7 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    client.id: '%env(CLIENT_ID)%'
+    secret.id: '%env(SECRET_ID)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,3 +23,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Services\TwitchApi\TwitchApi:
+        arguments:
+            $clientId:      '%env(CLIENT_ID)%'
+            $secretId:      '%env(SECRET_ID)%'
+            $client:        '@Symfony\Contracts\HttpClient\HttpClientInterface'
+            $denormalizer: '@Symfony\Component\Serializer\Normalizer\DenormalizerInterface'
