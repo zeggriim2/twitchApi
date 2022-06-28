@@ -4,13 +4,13 @@
 namespace App\Services\TwitchApi\Model\Chat;
 
 
-use App\Services\TwitchApi\Model\Chat\ChannelBadges\ChannelBadgeVersion;
+use App\Services\TwitchApi\Model\Chat\Badges\ChatBadgeVersion;
 
-class ChatChannelBadge
+class ChatBadge
 {
     private string $set_id;
     /**
-     * @var ChannelBadgeVersion[]
+     * @var ChatBadgeVersion[]
      */
     private array $versions;
 
@@ -24,16 +24,16 @@ class ChatChannelBadge
 
     /**
      * @param string $set_id
-     * @return ChatChannelBadge
+     * @return ChatBadge
      */
-    public function setSetId(string $set_id): ChatChannelBadge
+    public function setSetId(string $set_id): ChatBadge
     {
         $this->set_id = $set_id;
         return $this;
     }
 
     /**
-     * @return ChannelBadgeVersion[]
+     * @return ChatBadgeVersion[]
      */
     public function getVersions(): array
     {
@@ -41,10 +41,10 @@ class ChatChannelBadge
     }
 
     /**
-     * @param ChannelBadgeVersion[] $versions
-     * @return ChatChannelBadge
+     * @param ChatBadgeVersion[] $versions
+     * @return ChatBadge
      */
-    public function setVersions(array $versions): ChatChannelBadge
+    public function setVersions(array $versions): ChatBadge
     {
         $this->versions = $versions;
         return $this;

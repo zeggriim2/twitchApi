@@ -4,10 +4,9 @@
 namespace App\Services\TwitchApi\Resources;
 
 
-use App\Services\TwitchApi\Model\ChatChannelBadgesGroup;
+use App\Services\TwitchApi\Model\ChatBadgesGroup;
 use App\Services\TwitchApi\Model\ChatEmotesGroup;
 use App\Services\TwitchApi\Model\ChatEmotesSetGroup;
-use App\Services\TwitchApi\Model\ChatGlobalEmotesGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,7 +20,7 @@ class ChatApi extends AbstractResource
 
     public function getChannelsEmotes(
         string $bearer,
-        string $broadcasterId
+        ?string $broadcasterId
     ): ?ChatEmotesGroup
     {
         $queryParams = [];
@@ -68,40 +67,9 @@ class ChatApi extends AbstractResource
         return null;
     }
 
-    public function getEmoteSets(
-        string $bearer,
-        array $emotesSetIds
-    ): ?ChatEmotesSetGroup
-    {
-        $queryParams = [];
-
-        foreach( $emotesSetIds as $emotesSetId) {
-            $queryParams[] = ['key' => 'emote_set_id', 'value' => $emotesSetId];
-        }
-
-        $queryArrayParams = $this->constructQueryParamArray($queryParams);
-
-        $url = $this->constructUrl(self::URI_CHAT_EMOTES_SETS);
-
-        $options = $this->constructHeaders($bearer);
-        $options['query'] = $queryArrayParams;
-
-        $response = $this->client->request(
-            Request::METHOD_GET,
-            $url,
-            $options
-        );
-
-        if ($response->getStatusCode() === Response::HTTP_OK) {
-            return $this->denormalizer->denormalize($response->toArray(), ChatEmotesSetGroup::class);
-        }
-
-        return null;
-    }
-
     public function getEmoteSet(
         string $bearer,
-        string $emotesSetId
+        ?string $emotesSetId
     ): ?ChatEmotesSetGroup
     {
         $queryParams = [];
@@ -127,10 +95,37 @@ class ChatApi extends AbstractResource
         return null;
     }
 
-    public function getChannelChatBadges(
+    public function getEmoteSets(
         string $bearer,
-        string $broadcasterId
-    ): ?ChatChannelBadgesGroup
+        ?array $emotesSetIds
+    ): ?ChatEmotesSetGroup
+    {
+        $queryParams = [];
+        $queryParams[] = ['key' => 'emote_set_id', 'value' => $emotesSetIds];
+
+        $queryArrayParams = $this->constructQueryParamArray($queryParams);
+
+        $url = $this->constructUrl(self::URI_CHAT_EMOTES_SETS);
+
+        $options = $this->constructHeaders($bearer);
+        $options['query'] = $queryArrayParams;
+
+        $response = $this->client->request(
+            Request::METHOD_GET,
+            $url,
+            $options
+        );
+        if ($response->getStatusCode() === Response::HTTP_OK) {
+            return $this->denormalizer->denormalize($response->toArray(), ChatEmotesSetGroup::class);
+        }
+
+        return null;
+    }
+
+    public function getChannelBadges(
+        string $bearer,
+        ?string $broadcasterId
+    ): ?ChatBadgesGroup
     {
         $queryParams = [];
 
@@ -151,15 +146,14 @@ class ChatApi extends AbstractResource
         );
 
         if ($response->getStatusCode() === Response::HTTP_OK) {
-//            dd($response->toArray());
-            return $this->denormalizer->denormalize($response->toArray(), ChatChannelBadgesGroup::class);
+            return $this->denormalizer->denormalize($response->toArray(), ChatBadgesGroup::class);
         }
         return null;
     }
 
-    public function getGlobalChatBadges(
+    public function getGlobalBadges(
         string $bearer
-    )
+    ): ?ChatBadgesGroup
     {
         $options = $this->constructHeaders($bearer);
 
@@ -172,7 +166,7 @@ class ChatApi extends AbstractResource
         );
 
         if($response->getStatusCode() === Response::HTTP_OK) {
-
+            return $this->denormalizer->denormalize($response->toArray(), ChatBadgesGroup::class);
         }
 
         return null;

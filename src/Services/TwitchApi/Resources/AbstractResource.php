@@ -26,22 +26,6 @@ abstract class AbstractResource
         $this->denormalizer = $denormalizer;
     }
 
-    protected function constructQueryParamString(array $queryParams): string
-    {
-        $queryStringParams = '';
-        foreach ($queryParams as $paramMap) {
-            if (null !== $paramMap['value']) {
-                if (is_bool($paramMap['value'])) {
-                    $paramMap['value'] = (int) $paramMap['value'];
-                }
-                $format = is_int($paramMap['value']) ? '%d' : '%s';
-                $queryStringParams .= sprintf('&%s=' . $format, $paramMap['key'], $paramMap['value']);
-            }
-        }
-
-        return $queryStringParams ? '?' . mb_substr($queryStringParams, 1) : '';
-    }
-
     protected function constructQueryParamArray(array $queryParams): array
     {
         $queryArrayParams = [];

@@ -1,8 +1,8 @@
 install:
 	@make composer
 	@make docker-compose
-	@make stop-server
-	@make start-server
+	@make server-stop
+	@make server-start
 
 composer:
 	@echo "-----------> Composer Install"

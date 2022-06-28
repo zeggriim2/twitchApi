@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Services\TwitchApi\Model\Chat\ChannelBadges;
+namespace App\Services\TwitchApi\Model\Chat\Badges;
 
 
-class ChannelBadgeVersion
+class ChatBadgeVersion
 {
     private string $id;
     private string $image_url_1x;
@@ -21,9 +21,9 @@ class ChannelBadgeVersion
 
     /**
      * @param string $id
-     * @return ChannelBadgeVersion
+     * @return ChatBadgeVersion
      */
-    public function setId(string $id): ChannelBadgeVersion
+    public function setId(string $id): ChatBadgeVersion
     {
         $this->id = $id;
         return $this;
@@ -39,9 +39,9 @@ class ChannelBadgeVersion
 
     /**
      * @param string $image_url_1x
-     * @return ChannelBadgeVersion
+     * @return ChatBadgeVersion
      */
-    public function setImageUrl1x(string $image_url_1x): ChannelBadgeVersion
+    public function setImageUrl1x(string $image_url_1x): ChatBadgeVersion
     {
         $this->image_url_1x = $image_url_1x;
         return $this;
@@ -57,9 +57,9 @@ class ChannelBadgeVersion
 
     /**
      * @param string $image_url_2x
-     * @return ChannelBadgeVersion
+     * @return ChatBadgeVersion
      */
-    public function setImageUrl2x(string $image_url_2x): ChannelBadgeVersion
+    public function setImageUrl2x(string $image_url_2x): ChatBadgeVersion
     {
         $this->image_url_2x = $image_url_2x;
         return $this;
@@ -75,9 +75,9 @@ class ChannelBadgeVersion
 
     /**
      * @param string $image_url_4x
-     * @return ChannelBadgeVersion
+     * @return ChatBadgeVersion
      */
-    public function setImageUrl4x(string $image_url_4x): ChannelBadgeVersion
+    public function setImageUrl4x(string $image_url_4x): ChatBadgeVersion
     {
         $this->image_url_4x = $image_url_4x;
         return $this;
