@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\TwitchApi;
 
+use App\Services\TwitchApi\Resources\ChannelApi;
 use App\Services\TwitchApi\Resources\ChatApi;
+use App\Services\TwitchApi\Resources\ClipApi;
 use App\Services\TwitchApi\Resources\OauthApi;
 use App\Services\TwitchApi\Resources\SearchApi;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -15,6 +17,8 @@ class TwitchApi
     private OauthApi $oauthApi;
     private SearchApi $searchApi;
     private ChatApi $chatApi;
+    private ChannelApi $channelApi;
+    private ClipApi $clipApi;
 
     public function __construct(
         string $clientId,
@@ -22,9 +26,11 @@ class TwitchApi
         HttpClientInterface $client,
         DenormalizerInterface $denormalizer
     ) {
-        $this->oauthApi = new OauthApi($clientId, $secretId, $client, $denormalizer);
-        $this->searchApi = new SearchApi($clientId, $secretId, $client, $denormalizer);
-        $this->chatApi = new ChatApi($clientId, $secretId, $client, $denormalizer);
+        $this->oauthApi     = new OauthApi($clientId, $secretId, $client, $denormalizer);
+        $this->searchApi    = new SearchApi($clientId, $secretId, $client, $denormalizer);
+        $this->chatApi      = new ChatApi($clientId, $secretId, $client, $denormalizer);
+        $this->channelApi   = new ChannelApi($clientId, $secretId, $client, $denormalizer);
+        $this->clipApi      = new ClipApi($clientId, $secretId, $client, $denormalizer);
     }
 
     public function getOauthApi(): OauthApi
@@ -40,5 +46,15 @@ class TwitchApi
     public function getChatApi(): ChatApi
     {
         return $this->chatApi;
+    }
+
+    public function getChannelApi(): ChannelApi
+    {
+        return $this->channelApi;
+    }
+
+    public function getClipApi(): ClipApi
+    {
+        return $this->clipApi;
     }
 }
